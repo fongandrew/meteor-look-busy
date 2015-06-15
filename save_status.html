@@ -1,0 +1,11 @@
+<template name="saveStatus">
+  {{#if savesCount}}<div id="save-status">
+    {{#if failedSaves}}
+      <i class="fa fa-warning"></i>
+      Error: Save Failed
+    {{else}}
+      <i class="fa fa-refresh fa-spin"></i>
+      Saving {{savesCount}} Change{{#if savesPlural}}s{{/if}}
+    {{/if}}
+  </div>{{/if}}
+</template>

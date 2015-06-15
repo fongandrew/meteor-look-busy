@@ -1,0 +1,12 @@
+<template name="ifReady">
+  {{#if hasError}}
+    {{> subError}}
+
+  {{else}}{{#if isReady}}
+    {{> Template.contentBlock}}
+
+  {{else}}
+    {{> subLoading}}
+
+  {{/if}}{{/if}}
+</template>
