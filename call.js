@@ -51,6 +51,11 @@
       createdOn: createdOn
     };
     this.validateSave(_save);
+
+    // Remove prior _id first if it exists
+    if (_id) {
+      this.Saves.remove(_id);
+    }
     var _saveId = this.Saves.insert(_save);
 
     // Remove old failures when making a new call
@@ -85,8 +90,8 @@
         
         // Post-callback, set a timeout to de-register saves from collection
         Meteor.setTimeout(function() {
-          this.Saves.remove(_saveId);
-        }, this.config.delay);  
+          LookBusy.Saves.remove(_saveId);
+        }, LookBusy.config.delay);  
       }
       catch (err) { // Error => mark 
         // Error => log and mark object as failed
@@ -94,7 +99,7 @@
         if (err.stack) {
           console.error(err.stack);
         }
-        this.Saves.update(_saveId, {$set: {failedOn: new Date()}});
+        LookBusy.Saves.update(_saveId, {$set: {failedOn: new Date()}});
       }
     };
 
@@ -138,12 +143,12 @@
   };
 
 
-  // TEMPLATE HELPERS TO ASSESS WHETHER CALL IS IN PROGRESS
+  // HELPERS TO ASSESS WHETHER CALL IS IN PROGRESS
 
   // If call with _id is busy, returns call object. If no _id, returns 
-  // first call object for any method call. Returns empty string if not
+  // first call object for any method call. Returns nothing if not
   // busy. Does not consider failed calls.
-  Template.registerHelper('isBusy', function(_id) {
+  LookBusy.isBusy = function(_id) {
     var selector = {
       failedOn: {$exists: false}
     };
@@ -151,7 +156,7 @@
       selector._id = _id;
     }
     return LookBusy.Saves.findOne(selector);
-  });
+  };
 
 
 })();
