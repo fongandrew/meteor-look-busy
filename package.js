@@ -1,8 +1,8 @@
 Package.describe({
   name: 'fongandrew:look-busy',
-  summary: 'Indicator that shows server activity',
-  version: '0.4.0', // NB: Not backwards-compatible with 0.3.0
-  git: '' // Pending
+  summary: 'Indicator that shows Meteor method activity',
+  version: '1.0.0',
+  git: 'https://github.com/fongandrew/meteor-look-busy.git'
 });
 
 Package.onUse(function(api) {
@@ -20,7 +20,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  'use test';
+  'use strict';
 
   api.use('tinytest');
   api.use('fongandrew:look-busy');

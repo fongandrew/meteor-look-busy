@@ -1,4 +1,4 @@
-// Tests: To-do
+// TODO
 Tinytest.add('example', function (test) {
   'use strict';
   
